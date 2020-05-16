@@ -1,8 +1,8 @@
 {
-    "name": "thavarshan/base",
+    "name": "thavarshan/xoomp",
     "type": "project",
-    "description": "A PHP composer package template.",
-    "keywords": ["composer", "package"],
+    "description": "A PHP viedo thumbnail generator.",
+    "keywords": ["video", "thumbnail", "xoomp"],
     "authors": [
         {
             "name": "Thavarshan Thayananthajothy",
@@ -11,21 +11,22 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.2",
+        "php": "^7.2.9",
         "php-ffmpeg/php-ffmpeg": "^0.16.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.2.3",
-        "phpunit/phpunit": "^8.3"
+        "mockery/mockery": "^1.3.1",
+        "phpunit/phpunit": "^9.1",
+        "symfony/var-dumper": "^5.0"
     },
     "autoload": {
         "psr-4": {
-            "Generator\\": "src/"
+            "Xoomp\\": "src/Xoomp"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Generator\\Tests\\": "tests/"
+            "Xoomp\\Tests\\": "tests/"
         }
     },
     "config": {

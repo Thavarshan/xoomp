@@ -3,10 +3,10 @@
 ## Basic Usage
 
 ```php
-$generator = new Generator\Thumbnail();
-$thumbnail = __DIR__ . '/stubs/thumbnail.jpg';
-$video = __DIR__ . '/stubs/sample.mp4';
+$generator = new App\Thumbnail();
+$thumbnailLocation = '/path/where/thumbnail/should/be/saved';
+$video = '/path/where/video/file/is.mp4';
 
-$generator->generate($video, __DIR__ . '/stubs/');
+$generator->generate($video, $thumbnailLocation);
 ```
 

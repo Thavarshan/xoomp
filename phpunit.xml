@@ -13,7 +13,7 @@
          verbose="true"
 >
     <testsuites>
-        <testsuite name="Base Test Suite">
+        <testsuite name="Xoomp Test Suite">
             <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
