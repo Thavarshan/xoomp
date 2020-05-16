@@ -1,6 +1,6 @@
 {
     "name": "thavarshan/xoomp",
-    "type": "project",
+    "type": "package",
     "description": "A PHP video thumbnail generator.",
     "keywords": ["video", "thumbnail", "xoomp"],
     "authors": [
