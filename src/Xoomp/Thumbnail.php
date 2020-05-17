@@ -16,6 +16,20 @@ class Thumbnail
     protected $manager;
 
     /**
+     * The video from which a thumbnail image should be generated.
+     *
+     * @var string
+     */
+    protected $video;
+
+    /**
+     * Location where the generated thumbnail image should be stored.
+     *
+     * @var string
+     */
+    protected $path;
+
+    /**
      * Supported operating system types,
      *
      * @var array
@@ -25,8 +39,6 @@ class Thumbnail
         'WINNT' => 'winnt',
         'Linux' => 'linux',
     ];
-
-    protected $uname;
 
     /**
      * Create a new project instance.
@@ -39,18 +51,42 @@ class Thumbnail
     }
 
     /**
+     * Set video from which the thumnail should be generated.
+     *
+     * @param  string $video
+     * @return $this
+     */
+    public function from($video)
+    {
+        $this->video = $video;
+
+        return $this;
+    }
+
+    /**
+     * Set the path/location where the thumbnail generated should be stored.
+     *
+     * @param  string $path
+     * @return $this
+     */
+    public function saveTo(string $path)
+    {
+        $this->path = $path;
+
+        return $this;
+    }
+
+    /**
      * Generate thumbnail from video file.
      *
-     * @param  media $video
-     * @param  string $path
      * @return bool
      */
-    public function generate($video, string $path)
+    public function generate()
     {
         $this->getMediaManager()
-            ->open($video)
+            ->open($this->video)
             ->frame($this->timeCode())
-            ->save($path . 'thumbnail.jpg');
+            ->save($this->path . 'thumbnail.jpg');
     }
 
     /**

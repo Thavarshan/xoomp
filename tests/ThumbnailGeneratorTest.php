@@ -13,36 +13,38 @@ class ThumbnailGeneratorTest extends TestCase
 {
     public function testAThumbnailIsGenerated()
     {
-        $generator = new Thumbnail();
-        $thumbnail = __DIR__ . '/stubs/thumbnail.jpg';
+        $thumbnail = new Thumbnail();
+        $thumbnailFile = __DIR__ . '/stubs/thumbnail.jpg';
         $video = __DIR__ . '/stubs/sample.mp4';
 
-        if (file_exists($thumbnail)) {
-            @unlink($thumbnail);
+        if (file_exists($thumbnailFile)) {
+            @unlink($thumbnailFile);
         }
 
-        $generator->generate($video, __DIR__ . '/stubs/');
+        $thumbnail->from($video)
+            ->saveTo(__DIR__ . '/stubs/')
+            ->generate();
 
-        $this->assertTrue(file_exists($thumbnail));
-        @unlink($thumbnail);
+        $this->assertTrue(file_exists($thumbnailFile));
+        @unlink($thumbnailFile);
     }
 
     public function testMediaManagerIsCreated()
     {
-        $generator = new Thumbnail();
-        $reflector = new ReflectionClass($generator);
+        $thumbnail = new Thumbnail();
+        $reflector = new ReflectionClass($thumbnail);
         $method = $reflector->getMethod('getMediaManager');
         $method->setAccessible(true);
-        $this->assertInstanceOf(FFMpeg::class, $method->invoke($generator));
+        $this->assertInstanceOf(FFMpeg::class, $method->invoke($thumbnail));
     }
 
     public function testMediaManagerTimeCoderIsCreated()
     {
-        $generator = new Thumbnail();
-        $reflector = new ReflectionClass($generator);
+        $thumbnail = new Thumbnail();
+        $reflector = new ReflectionClass($thumbnail);
         $method = $reflector->getMethod('timeCode');
         $method->setAccessible(true);
-        $this->assertInstanceOf(TimeCode::class, $method->invoke($generator));
+        $this->assertInstanceOf(TimeCode::class, $method->invoke($thumbnail));
     }
 
     public function testThrowsExceptionIfUnSupportedOSDetected()
@@ -50,18 +52,20 @@ class ThumbnailGeneratorTest extends TestCase
         $this->expectException(InvalidOperatingSystemType::class);
         $this->expectExceptionMessage('This type of operating systems are not supported');
 
-        $generator = new Thumbnail();
-        $reflector = new ReflectionClass($generator);
+        $thumbnail = new Thumbnail();
+        $reflector = new ReflectionClass($thumbnail);
         $method = $reflector->getMethod('operatingSystem');
         $method->setAccessible(true);
-        $method->invokeArgs($generator, [true]);
-        $thumbnail = __DIR__ . '/stubs/thumbnail.jpg';
+        $method->invokeArgs($thumbnail, [true]);
+        $thumbnailFile = __DIR__ . '/stubs/thumbnail.jpg';
         $video = __DIR__ . '/stubs/sample.mp4';
 
-        if (file_exists($thumbnail)) {
-            @unlink($thumbnail);
+        if (file_exists($thumbnailFile)) {
+            @unlink($thumbnailFile);
         }
 
-        $generator->generate($video, __DIR__ . '/stubs/');
+        $thumbnail->from($video)
+            ->saveTo(__DIR__ . '/stubs/')
+            ->generate();
     }
 }
