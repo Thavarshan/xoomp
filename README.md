@@ -32,6 +32,7 @@ Xoomp uses PHPUnit for testing. To clone xoomp into your local machine and run t
 ```bash
 git clone git@github.com:Thavarshan/xoomp.git
 cd xoomp
+composer install
 vendor/bin/phpunit
 ```
 
