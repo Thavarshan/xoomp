@@ -2,8 +2,8 @@
 
 namespace Xoomp;
 
-use FFMpeg\FFMpeg;
 use FFMpeg\Coordinate\TimeCode;
+use FFMpeg\FFMpeg;
 use Xoomp\Exceptions\InvalidOperatingSystemType;
 
 class Thumbnail
@@ -30,7 +30,7 @@ class Thumbnail
     protected $path;
 
     /**
-     * Supported operating system types,
+     * Supported operating system types,.
      *
      * @var array
      */
@@ -53,7 +53,8 @@ class Thumbnail
     /**
      * Set video from which the thumnail should be generated.
      *
-     * @param  string $video
+     * @param string $video
+     *
      * @return $this
      */
     public function from($video)
@@ -66,7 +67,6 @@ class Thumbnail
     /**
      * Set the path/location where the thumbnail generated should be stored.
      *
-     * @param  string $path
      * @return $this
      */
     public function saveTo(string $path)
@@ -86,7 +86,7 @@ class Thumbnail
         $this->getMediaManager()
             ->open($this->video)
             ->frame($this->timeCode())
-            ->save($this->path . 'thumbnail.jpg');
+            ->save($this->path.'thumbnail.jpg');
     }
 
     /**
@@ -125,7 +125,7 @@ class Thumbnail
      */
     protected function getBinaryfiles()
     {
-        $binaries = dirname(__DIR__) . '/binaries/' . $this->operatingSystem();
+        $binaries = dirname(__DIR__).'/binaries/'.$this->operatingSystem();
 
         return [
             'ffmpeg.binaries' => "{$binaries}/ffmpeg",
@@ -136,16 +136,17 @@ class Thumbnail
     /**
      * Determine PHP operating system and get relevant path of bin file.
      *
-     * @param  bool $override
      * @return string
      *
      * @throws \Xoomp\Exceptions\InvalidOperatingSystemType
      */
     protected function operatingSystem(bool $override = false)
     {
+        dd(php_uname('s'));
+
         $operatingSystem = php_uname('s');
 
-        if (array_key_exists($operatingSystem, $this->osversion) && ! $override) {
+        if (array_key_exists($operatingSystem, $this->osversion) && !$override) {
             return $this->osversion[$operatingSystem];
         }
 
