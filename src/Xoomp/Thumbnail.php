@@ -38,6 +38,7 @@ class Thumbnail
         'Darwin' => 'darwin',
         'WINNT' => 'winnt',
         'Linux' => 'linux',
+        'Windows NT' => 'winnt',
     ];
 
     /**
@@ -142,8 +143,6 @@ class Thumbnail
      */
     protected function operatingSystem(bool $override = false)
     {
-        dd(php_uname('s'));
-
         $operatingSystem = php_uname('s');
 
         if (array_key_exists($operatingSystem, $this->osversion) && !$override) {
